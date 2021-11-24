@@ -1,13 +1,14 @@
+require('dotenv').config();
 const express = require('express')
 const app = express();
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT
 const path = require('path')
 var cors = require('cors')
 app.use(cors(["localhost:5000", "localhost:3000"]));
 const mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
-mongoose.connect('mongodb+srv://admin:helloadmi@cluster0.e2j9o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+mongoose.connect(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.e2j9o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);
 
 const allUsers = mongoose.model('allUsers', {
   name: String,
